@@ -16,25 +16,19 @@ export const site = {
   links: [
     {
       title: "GitHub",
-      handle: "@your-github-handle",
-      url: "https://github.com/your-github-handle",
-      symbol: "↗",
-    },
-    {
-      title: "博客",
-      handle: "your-blog.example",
-      url: "https://your-blog.example",
+      handle: "@feiwangyuan-sudo",
+      url: "https://github.com/feiwangyuan-sudo",
       symbol: "↗",
     },
     {
       title: "邮箱",
-      handle: "hello@your-domain.com",
-      url: "mailto:hello@your-domain.com",
+      handle: "1151755251@163.com",
+      url: "mailto:1151755251@163.com",
       symbol: "↗",
     },
     {
       title: "抖音",
-      handle: "@your-douyin-id",
+      handle: "抖音号：1991034483",
       url: "https://www.douyin.com/",
       symbol: "↗",
     },
