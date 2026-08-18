@@ -29,7 +29,7 @@ export const site = {
     {
       title: "抖音",
       handle: "抖音号：1991034483",
-      url: "https://www.douyin.com/",
+      url: "https://v.douyin.com/CQC9D-otCYY/",
       symbol: "↗",
     },
   ],
