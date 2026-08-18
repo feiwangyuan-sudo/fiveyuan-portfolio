@@ -22,8 +22,8 @@ export const site = {
     },
     {
       title: "邮箱",
-      handle: "1151755251@163.com",
-      url: "mailto:1151755251@163.com",
+      handle: "17684033064@163.com",
+      url: "mailto:17684033064@163.com",
       symbol: "↗",
     },
     {
