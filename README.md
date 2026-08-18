@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-打开 [http://fiveyuan-portfolio.vercel.app](http://fiveyuan-portfolio.vercel.app) 查看网站。生产构建使用：
+打开 [我的个人网站](https://fiveyuan-portfolio-git-main-feiwangyuan-sudos-projects.vercel.app/) 查看网站。生产构建使用：
 
 ```bash
 npm run build
