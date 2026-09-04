@@ -13,6 +13,15 @@ export const site = {
     sourceUrl: "#",
     tags: ["FULL STACK", "ORDERING", "PRODUCT"],
   },
+  gallery: [
+    { src: "/gallery/coffee-latte.jpg" },
+    { src: "/gallery/pig-detective.jpg" },
+    { src: "/gallery/pink-character-01.jpg" },
+    { src: "/gallery/pink-character-02.jpg" },
+    { src: "/gallery/pink-character-03.jpg" },
+    { src: "/gallery/pink-character-04.jpg" },
+    { src: "/gallery/coding-screen.jpg" },
+  ],
   links: [
     {
       title: "GitHub",

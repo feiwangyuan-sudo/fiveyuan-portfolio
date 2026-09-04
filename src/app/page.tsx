@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 
 function ArrowIcon() {
@@ -16,7 +19,57 @@ function SparkIcon() {
   );
 }
 
+function CloseIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+      <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function ChevronIcon({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+      <path
+        d={direction === "left" ? "m12 4-6 6 6 6" : "m8 4 6 6-6 6"}
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Home() {
+  const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
+  const selectedImage = selectedPhoto === null ? null : site.gallery[selectedPhoto];
+
+  const closeGallery = () => setSelectedPhoto(null);
+  const showPrevious = () => {
+    setSelectedPhoto((current) => current === null ? current : (current - 1 + site.gallery.length) % site.gallery.length);
+  };
+  const showNext = () => {
+    setSelectedPhoto((current) => current === null ? current : (current + 1) % site.gallery.length);
+  };
+
+  useEffect(() => {
+    if (selectedPhoto === null) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeGallery();
+      if (event.key === "ArrowLeft") showPrevious();
+      if (event.key === "ArrowRight") showNext();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedPhoto]);
+
   return (
     <main>
       <nav className="nav shell" aria-label="主导航">
@@ -26,6 +79,7 @@ export default function Home() {
         </a>
         <div className="nav-links">
           <a href="#works">Works</a>
+          <a href="#gallery">Gallery</a>
           <a href="#about">About</a>
           <a href="#links">Links</a>
         </div>
@@ -124,6 +178,27 @@ export default function Home() {
         </article>
       </section>
 
+      <section className="gallery-section shell" id="gallery" aria-label="照片墙">
+        <div className="section-heading gallery-heading">
+          <p className="eyebrow">PHOTO WALL</p>
+          <p className="section-index">{String(site.gallery.length).padStart(2, "0")} IMAGES</p>
+        </div>
+        <div className="gallery-grid">
+          {site.gallery.map((photo, index) => (
+            <button
+              className="gallery-item"
+              key={photo.src}
+              type="button"
+              onClick={() => setSelectedPhoto(index)}
+              aria-label={`查看第 ${index + 1} 张照片`}
+            >
+              <img src={photo.src} alt="" />
+              <span className="gallery-item-glow" aria-hidden="true" />
+            </button>
+          ))}
+        </div>
+      </section>
+
       <section className="about-section shell" id="about">
         <p className="eyebrow">WHAT I BUILD</p>
         <div className="about-grid">
@@ -162,6 +237,21 @@ export default function Home() {
         <span>© 2026 {site.name}</span>
         <a href="#top">BACK TO TOP ↑</a>
       </footer>
+
+      {selectedImage && (
+        <div className="gallery-lightbox" role="dialog" aria-modal="true" aria-label="照片预览" onMouseDown={closeGallery}>
+          <button className="lightbox-close" type="button" onMouseDown={(event) => event.stopPropagation()} onClick={closeGallery} aria-label="关闭预览">
+            <CloseIcon />
+          </button>
+          <button className="lightbox-control lightbox-previous" type="button" onMouseDown={(event) => event.stopPropagation()} onClick={showPrevious} aria-label="上一张照片">
+            <ChevronIcon direction="left" />
+          </button>
+          <img className="lightbox-image" src={selectedImage.src} alt="" onMouseDown={(event) => event.stopPropagation()} />
+          <button className="lightbox-control lightbox-next" type="button" onMouseDown={(event) => event.stopPropagation()} onClick={showNext} aria-label="下一张照片">
+            <ChevronIcon direction="right" />
+          </button>
+        </div>
+      )}
     </main>
   );
 }
