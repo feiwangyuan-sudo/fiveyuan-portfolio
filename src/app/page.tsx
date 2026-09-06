@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { freshOrder } from "@/lib/random";
+import RandomIllustration from "@/components/random-illustration";
 
 const GALLERY_PAGE_SIZE = 12;
 
@@ -109,19 +110,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-art" aria-label="抽象的科技插画">
-          <div className="art-grid" />
-          <div className="art-orbit orbit-one" />
-          <div className="art-orbit orbit-two" />
-          <div className="art-orb">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="art-label label-top">SYSTEM / ONLINE</div>
-          <div className="art-label label-bottom">AI × FULL STACK</div>
-          <div className="art-coordinate">35° 42′ N&nbsp;&nbsp; 139° 46′ E</div>
-        </div>
+        <RandomIllustration />
 
         <a className="scroll-hint" href="#works">
           <span>SCROLL TO EXPLORE</span>
