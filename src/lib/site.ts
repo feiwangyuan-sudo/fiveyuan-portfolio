@@ -18,7 +18,6 @@ export const site = {
     { src: "/gallery/pink-character-02.jpg" },
     { src: "/gallery/pink-character-03.jpg" },
     { src: "/gallery/pink-character-04.jpg" },
-    { src: "/gallery/coding-screen.jpg" },
     { src: "/gallery/微信图片_20260906161408_24_1.jpg" },
     { src: "/gallery/微信图片_20260906161410_25_1.jpg" },
     { src: "/gallery/微信图片_20260906161411_26_1.jpg" },

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
+import { freshOrder } from "@/lib/random";
 
 const GALLERY_PAGE_SIZE = 12;
 
@@ -44,11 +45,13 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
 }
 
 export default function Home() {
-  const [visiblePhotoCount, setVisiblePhotoCount] = useState(GALLERY_PAGE_SIZE);
-  const visiblePhotos = site.gallery.slice(0, visiblePhotoCount);
-  const hasMorePhotos = visiblePhotos.length < site.gallery.length;
+  const [photos, setPhotos] = useState<typeof site.gallery>([]);
+  const [page, setPage] = useState(0);
+  const pageCount = Math.ceil(photos.length / GALLERY_PAGE_SIZE);
+  const visiblePhotos = photos.slice(page * GALLERY_PAGE_SIZE, (page + 1) * GALLERY_PAGE_SIZE);
+  useEffect(() => { setPhotos(freshOrder(site.gallery, "fiveyuan-gallery-first")); }, []);
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
-  const selectedImage = selectedPhoto === null ? null : site.gallery[selectedPhoto];
+  const selectedImage = selectedPhoto === null ? null : photos[selectedPhoto];
 
   const closeGallery = () => setSelectedPhoto(null);
   const showPrevious = () => {
@@ -194,7 +197,7 @@ export default function Home() {
               className="gallery-item"
               key={photo.src}
               type="button"
-              onClick={() => setSelectedPhoto(index)}
+              onClick={() => setSelectedPhoto(page * GALLERY_PAGE_SIZE + index)}
               aria-label={`查看第 ${index + 1} 张照片`}
             >
               <img src={photo.src} alt="" loading="lazy" decoding="async" />
@@ -202,18 +205,14 @@ export default function Home() {
             </button>
           ))}
         </div>
-        {hasMorePhotos && (
+        {pageCount > 1 && (
           <div className="gallery-load-more">
-            <button
-              className="button button-quiet"
-              type="button"
-              aria-controls="gallery-images"
-              onClick={() => setVisiblePhotoCount((count) => Math.min(count + GALLERY_PAGE_SIZE, site.gallery.length))}
-            >
-              加载更多 <span aria-hidden="true">↓</span>
-            </button>
+            <button className="button button-quiet" disabled={page === 0} onClick={() => setPage(page - 1)}>上一页</button>
+            <span role="status">{page + 1} / {pageCount}</span>
+            <button className="button button-quiet" disabled={page === pageCount - 1} onClick={() => setPage(page + 1)}>下一页</button>
           </div>
         )}
+        <a className="text-link" href="/anime">随机插画 · 换一种心情 ↗</a>
         <span className="gallery-status" role="status">
           已展示 {visiblePhotos.length} 张，共 {site.gallery.length} 张照片
         </span>
