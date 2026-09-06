@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { freshOrder } from "@/lib/random";
 import RandomIllustration from "@/components/random-illustration";
@@ -46,6 +46,22 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
 }
 
 export default function Home() {
+  useLayoutEffect(() => {
+    const previousRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+    const resetToTop = () => {
+      if (window.location.hash) {
+        window.history.replaceState(window.history.state, "", window.location.pathname + window.location.search);
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    };
+    resetToTop();
+    window.addEventListener("pageshow", resetToTop);
+    return () => {
+      window.removeEventListener("pageshow", resetToTop);
+      window.history.scrollRestoration = previousRestoration;
+    };
+  }, []);
   const [photos, setPhotos] = useState<typeof site.gallery>([]);
   const [page, setPage] = useState(0);
   const pageCount = Math.ceil(photos.length / GALLERY_PAGE_SIZE);
