@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+.gallery-load-more { display: flex; justify-content: center; margin-top: 30px; }
+.gallery-load-more button { cursor: pointer; font-family: inherit; }
+.gallery-load-more button:focus-visible { outline: 2px solid #5d9ab2; outline-offset: 4px; }
+.gallery-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
 :root {
   --font-manrope: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-dm-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;

@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 
+const GALLERY_PAGE_SIZE = 12;
+
 function ArrowIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">
@@ -42,6 +44,9 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
 }
 
 export default function Home() {
+  const [visiblePhotoCount, setVisiblePhotoCount] = useState(GALLERY_PAGE_SIZE);
+  const visiblePhotos = site.gallery.slice(0, visiblePhotoCount);
+  const hasMorePhotos = visiblePhotos.length < site.gallery.length;
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
   const selectedImage = selectedPhoto === null ? null : site.gallery[selectedPhoto];
 
@@ -183,8 +188,8 @@ export default function Home() {
           <p className="eyebrow">PHOTO WALL</p>
           <p className="section-index">{String(site.gallery.length).padStart(2, "0")} IMAGES</p>
         </div>
-        <div className="gallery-grid">
-          {site.gallery.map((photo, index) => (
+        <div className="gallery-grid" id="gallery-images">
+          {visiblePhotos.map((photo, index) => (
             <button
               className="gallery-item"
               key={photo.src}
@@ -192,11 +197,26 @@ export default function Home() {
               onClick={() => setSelectedPhoto(index)}
               aria-label={`查看第 ${index + 1} 张照片`}
             >
-              <img src={photo.src} alt="" />
+              <img src={photo.src} alt="" loading="lazy" decoding="async" />
               <span className="gallery-item-glow" aria-hidden="true" />
             </button>
           ))}
         </div>
+        {hasMorePhotos && (
+          <div className="gallery-load-more">
+            <button
+              className="button button-quiet"
+              type="button"
+              aria-controls="gallery-images"
+              onClick={() => setVisiblePhotoCount((count) => Math.min(count + GALLERY_PAGE_SIZE, site.gallery.length))}
+            >
+              加载更多 <span aria-hidden="true">↓</span>
+            </button>
+          </div>
+        )}
+        <span className="gallery-status" role="status">
+          已展示 {visiblePhotos.length} 张，共 {site.gallery.length} 张照片
+        </span>
       </section>
 
       <section className="about-section shell" id="about">
