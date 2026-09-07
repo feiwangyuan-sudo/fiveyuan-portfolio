@@ -217,7 +217,6 @@ export default function Home() {
             <button className="button button-quiet" disabled={page === pageCount - 1} onClick={() => setPage(page + 1)}>下一页</button>
           </div>
         )}
-        <a className="text-link" href="/anime">随机插画 · 换一种心情 ↗</a>
         <span className="gallery-status" role="status">
           已展示 {visiblePhotos.length} 张，共 {site.gallery.length} 张照片
         </span>

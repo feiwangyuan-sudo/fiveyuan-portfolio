@@ -24,7 +24,6 @@ export const site = {
     { src: "/gallery/微信图片_20260906161414_27_1.jpg" },
     { src: "/gallery/微信图片_20260906161415_28_1.jpg" },
     { src: "/gallery/微信图片_20260906161456_29_1.png" },
-    { src: "/gallery/微信图片_20260906161458_30_1.png" },
     { src: "/gallery/微信图片_20260906161507_31_1.jpg" },
     { src: "/gallery/微信图片_20260906161510_32_1.jpg" },
     { src: "/gallery/微信图片_20260906161513_33_1.jpg" },
@@ -53,7 +52,6 @@ export const site = {
     { src: "/gallery/微信图片_20260906163656_56_1.jpg" },
     { src: "/gallery/微信图片_20260906163657_57_1.jpg" },
     { src: "/gallery/微信图片_20260906163701_58_1.jpg" },
-    { src: "/gallery/微信图片_20260906163702_59_1.jpg" },
     { src: "/gallery/微信图片_20260906163734_60_1.png" },
   ],
   links: [

@@ -11,17 +11,9 @@
 .illustration-credit a:hover { text-decoration: underline; }
 .illustration-bottom button { flex-shrink: 0; border: 0; cursor: pointer; }
 .illustration-bottom button:focus-visible { outline: 3px solid #78b6ca; outline-offset: 3px; }
-.anime-page .random-illustration { max-width: 680px; height: 72dvh; min-height: 400px; margin: 0 auto; }
 
 .gallery-load-more { gap: 20px; align-items: center; margin-bottom: 25px; }
 .button:disabled { opacity: .35; cursor: not-allowed; transform: none; }
-.anime-page { padding-top: 35px; padding-bottom: 55px; text-align: center; }
-.anime-heading { padding: 35px 0; }
-.anime-heading .eyebrow, .anime-page > .eyebrow { justify-content: center; }
-.anime-heading h1 { font-size: clamp(30px, 5vw, 58px); letter-spacing: -.04em; margin: 20px 0 0; }
-.anime-frame { height: 65dvh; min-height: 260px; display: grid; place-items: center; background: linear-gradient(135deg,#e6f2f1,#edf0f7); border-radius: 22px; overflow: hidden; margin-bottom: 25px; }
-.anime-frame img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
-.anime-page > button { cursor: pointer; border: 0; margin-bottom: 22px; }
 
 .gallery-load-more { display: flex; justify-content: center; margin-top: 30px; }
 .gallery-load-more button { cursor: pointer; font-family: inherit; }
